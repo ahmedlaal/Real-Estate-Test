@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:realstateapp/screens/Reusable%20Widgets/screen_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,23 +10,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int CurrentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    int CurrentIndex = 0;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
+      body: Screens[CurrentIndex],
       bottomNavigationBar: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        decoration: BoxDecoration(boxShadow: [
+        decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.black.withOpacity(0.1),
               blurRadius: 25,
               offset: const Offset(8, 20))
         ]),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),
           child: BottomNavigationBar(
-              // backgroundColor: Colors.transparent,
+              backgroundColor: Colors.red,
               selectedItemColor: Colors.redAccent,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
               unselectedItemColor: Colors.black,
               currentIndex: CurrentIndex,
               onTap: (index) {
@@ -32,14 +38,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   CurrentIndex = index;
                 });
               },
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+              items: [
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite), label: "Favorite"),
+                  icon: Icon(Icons.search),
+                  label: "",
+                  // activeIcon: Container(
+                  //   height: 20,
+                  //   width: 20,
+                  //   decoration: BoxDecoration(
+                  //       shape: BoxShape.circle, color: Colors.orange),
+                  //   child: Icon(Icons.search),
+                  // )
+                ),
+                BottomNavigationBarItem(icon: Icon(Icons.message), label: ""),
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+                BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ""),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.settings), label: "Setting"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person_outline), label: "Profile"),
+                    icon: Icon(Icons.person_outline), label: ""),
               ]),
         ),
       ),
