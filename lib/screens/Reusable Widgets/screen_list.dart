@@ -5,9 +5,9 @@ import 'package:realstateapp/screens/profile_page.dart';
 import 'package:realstateapp/screens/serach_page.dart';
 
 List Screens = const [
-  LikeScreen(),
   SearchScreen(),
+  MessageScreen(),
   HomePageScreen(),
+  LikeScreen(),
   ProfileScreen(),
-  MessageScreen()
 ];

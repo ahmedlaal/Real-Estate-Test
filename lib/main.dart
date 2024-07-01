@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realstateapp/screens/home.dart';
+import 'package:realstateapp/screens/serach_page.dart';
 
 void main() {
   runApp(const MyApp());
