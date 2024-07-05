@@ -7,7 +7,7 @@ class AnimatedAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<AnimatedAppBar> createState() => _AnimatedAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(70);
 }
 
 class _AnimatedAppBarState extends State<AnimatedAppBar>
@@ -82,10 +82,15 @@ class _AnimatedAppBarState extends State<AnimatedAppBar>
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return AppBar(
-      backgroundColor: Colors.green,
+      // toolbarHeight: 100.0,
+      backgroundColor: Colors.white,
       automaticallyImplyLeading: false,
       flexibleSpace: Padding(
-        padding: const EdgeInsets.only(top: 30, left: 10, right: 10),
+        padding: EdgeInsets.only(
+            top: size.height * 0.05,
+            left: size.width * 0.01,
+            right: size.width * 0.01,
+            bottom: size.height * 0.02),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -94,16 +99,34 @@ class _AnimatedAppBarState extends State<AnimatedAppBar>
               builder: (context, child) {
                 return Container(
                   width: _widthAnimation.value,
-                  height: 50.0,
-                  color: Colors.white,
-                  // decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.all(Radius.circular(10))
-                  //     ),
+                  // height: size.height ,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      // border: Border(),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 1),
+                        ),
+                      ]),
                   alignment: Alignment.center,
                   child: _widthAnimation.value >= 150
                       ? FadeTransition(
                           opacity: _fadeAnimation,
                           child: TextFormField(
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              prefixIcon: Icon(Icons.location_on),
+                              hintText: "Saint Diego",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
                             style: TextStyle(color: Colors.white, fontSize: 16),
                           ),
                         )
