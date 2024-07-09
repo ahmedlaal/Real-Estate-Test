@@ -1,10 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:realstateapp/screens/Functions/functions.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  static const _position = LatLng(24.875166877436843, 67.13613707672361);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -12,50 +20,62 @@ class SearchScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
-          height: size.height * 0.9,
+          height: size.height * 1,
           width: size.width * 1,
           padding: EdgeInsets.only(
               left: size.width * 0.02,
               right: size.width * 0.02,
               top: size.height * 0.03),
-          child: Column(
+          child: Stack(
             children: [
               Container(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          focusColor: Colors.white,
-                          fillColor: Colors.white,
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(0, 255, 255, 255)),
+                height: size.height * 1,
+                width: size.width * 1,
+                child: GoogleMap(
+                    initialCameraPosition:
+                        CameraPosition(target: _position, zoom: 13)),
+              ),
+              Positioned(
+                top: size.height * 0.01,
+                left: 0,
+                right: 0,
+                child: Container(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            focusColor: Colors.white,
+                            fillColor: Colors.white,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide.none,
+                            ),
+                            hintText: "Saint Diago",
+                            prefixIcon: Icon(Icons.search),
+                            contentPadding:
+                                EdgeInsets.symmetric(vertical: 10.0),
                           ),
-                          hintText: "Saint Diago",
-                          prefixIcon: Icon(Icons.search),
-                          contentPadding: EdgeInsets.symmetric(vertical: 10.0),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: size.width * 0.03,
-                    ),
-                    Container(
-                      // color: Colors.white,
-                      decoration: BoxDecoration(
-                          color: Colors.white, shape: BoxShape.circle),
-                      child: Center(
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.format_align_center)),
+                      SizedBox(
+                        width: size.width * 0.03,
                       ),
-                    ),
-                  ],
+                      Container(
+                        // color: Colors.white,
+                        decoration: BoxDecoration(
+                            color: Colors.white, shape: BoxShape.circle),
+                        child: Center(
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.format_align_center)),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
